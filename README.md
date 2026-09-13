@@ -33,6 +33,8 @@ Add a changeset for each releasable change. Whenever a scoped package version
 changes, include `@tu-cis-courses/docusaurus-template` in the changeset so its
 embedded tested versions receive a publishable version bump.
 
-Repository release configuration requires the `NPM_TOKEN` secret. Generated
-template synchronization also requires the `TEMPLATE_SYNC_TOKEN` secret and
-the `GENERATED_TEMPLATE_REPOSITORY` variable.
+The first publication requires a temporary direct-publish `NPM_TOKEN` because
+npm cannot stage a brand-new package. Revoke that token after the beta is live,
+then configure `release.yml` as an npm trusted publisher for each package.
+Generated template synchronization requires the `TEMPLATE_SYNC_TOKEN` secret
+and the `GENERATED_TEMPLATE_REPOSITORY` variable.
