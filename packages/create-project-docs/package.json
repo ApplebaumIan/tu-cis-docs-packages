@@ -1,16 +1,24 @@
 {
   "name": "@tu-cis-courses/create-project-docs",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-next.2",
   "description": "Create and update Temple University CIS Docusaurus documentation sites.",
   "license": "MIT",
   "bin": {
     "create-project-docs": "bin.js"
   },
-  "files": ["bin.js", "src", "README.md", "LICENSE"],
+  "files": [
+    "bin.js",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "node --test"
   },
-  "publishConfig": {"access": "public", "provenance": true},
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ApplebaumIan/tu-cis-docs-packages.git",
@@ -21,7 +29,7 @@
   },
   "dependencies": {
     "@tu-cis-courses/docs-content-template": "1.0.0-beta.1",
-    "@tu-cis-courses/docusaurus-template": "1.0.0-beta.1",
+    "@tu-cis-courses/docusaurus-template": "1.0.0-next.2",
     "semver": "^7.7.2"
   }
 }

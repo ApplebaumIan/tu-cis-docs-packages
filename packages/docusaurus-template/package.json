@@ -1,6 +1,6 @@
 {
   "name": "@tu-cis-courses/docusaurus-template",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-next.2",
   "description": "Managed Docusaurus site scaffold for Temple University CIS projects.",
   "license": "MIT",
   "main": "manifest.json",
@@ -9,8 +9,16 @@
     "./manifest": "./manifest.json",
     "./package.json": "./package.json"
   },
-  "files": ["scaffold", "manifest.json", "README.md", "LICENSE"],
-  "publishConfig": {"access": "public", "provenance": true},
+  "files": [
+    "scaffold",
+    "manifest.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ApplebaumIan/tu-cis-docs-packages.git",
