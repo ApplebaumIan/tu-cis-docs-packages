@@ -1,0 +1,33 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: yarn
+          cache-dependency-path: documentation/yarn.lock
+      - name: Install dependencies
+        working-directory: documentation
+        run: yarn install --frozen-lockfile
+      - name: Deploy to GitHub Pages
+        working-directory: documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG_NAME: ${{ github.repository_owner }}
+          PROJECT_NAME: ${{ github.event.repository.name }}
+          GIT_USER: github-actions[bot]
+        run: yarn deploy

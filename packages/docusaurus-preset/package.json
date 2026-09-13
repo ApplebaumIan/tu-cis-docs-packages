@@ -1,0 +1,45 @@
+{
+  "name": "@tu-cis-courses/docusaurus-preset",
+  "version": "1.0.0-beta.1",
+  "description": "Docusaurus preset, theme, and documentation integrations for Temple University CIS courses.",
+  "license": "MIT",
+  "main": "src/preset/index.js",
+  "exports": {
+    ".": "./src/preset/index.js",
+    "./config": "./src/config/index.js",
+    "./theme": "./src/themePlugin/index.js",
+    "./revision-history": "./src/plugins/revision-history/index.js",
+    "./ProjectReadme": "./src/components/ProjectReadme/index.js",
+    "./RevisionHistory": "./src/components/RevisionHistory/index.js",
+    "./styles": "./styles/custom.css",
+    "./package.json": "./package.json"
+  },
+  "files": ["src", "styles", "tutorial", "tutorialSidebars.js", "README.md", "LICENSE"],
+  "publishConfig": {"access": "public", "provenance": true},
+  "engines": {"node": ">=20.0.0"},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApplebaumIan/tu-cis-docs-packages.git",
+    "directory": "packages/docusaurus-preset"
+  },
+  "dependencies": {
+    "@tu-cis-courses/docusaurus-components": "^1.0.0-beta.1",
+    "core-js": "^3.1.4",
+    "mobx": "^6.9.0",
+    "redocusaurus": "^2.5.2",
+    "styled-components": "^6.0.5"
+  },
+  "peerDependencies": {
+    "@docusaurus/core": ">=3.9.2 <4.0.0",
+    "@docusaurus/plugin-content-docs": ">=3.9.2 <4.0.0",
+    "@docusaurus/preset-classic": ">=3.9.2 <4.0.0",
+    "@docusaurus/theme-classic": ">=3.9.2 <4.0.0",
+    "@docusaurus/theme-common": ">=3.9.2 <4.0.0",
+    "@docusaurus/theme-live-codeblock": ">=3.9.2 <4.0.0",
+    "@docusaurus/theme-mermaid": ">=3.9.2 <4.0.0",
+    "@docusaurus/utils": ">=3.9.2 <4.0.0",
+    "@mdx-js/react": ">=3.0.1 <4.0.0",
+    "react": ">=18.2.0 <20.0.0",
+    "react-dom": ">=18.2.0 <20.0.0"
+  }
+}

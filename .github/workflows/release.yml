@@ -1,0 +1,48 @@
+name: Release Packages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  actions: write
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+          cache: yarn
+          cache-dependency-path: yarn.lock
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - run: yarn pack:check
+      - run: yarn test:packed
+      - run: yarn build
+        env:
+          ORG_NAME: test-organization
+          PROJECT_NAME: test-project
+          DISABLE_REVISION_HISTORY: "1"
+      - uses: changesets/action@v1
+        id: changesets
+        with:
+          version: yarn version-packages
+          publish: yarn changeset publish --tag next
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Synchronize generated repository
+        if: steps.changesets.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run sync-generated-template.yml --ref main
