@@ -6,6 +6,7 @@
   },
   "recommended": {
     "docusaurus": "3.9.2",
+    "mermaid": "11.10.1",
     "docusaurusComponents": "1.0.0-beta.1",
     "docusaurusPreset": "1.0.0-beta.1",
     "docsContentTemplate": "1.0.0-beta.1",

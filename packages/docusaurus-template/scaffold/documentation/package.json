@@ -28,6 +28,7 @@
     "@tu-cis-courses/docusaurus-components": "1.0.0-beta.1",
     "@tu-cis-courses/docusaurus-preset": "1.0.0-beta.1",
     "clsx": "^2.1.1",
+    "mermaid": "11.10.1",
     "prism-react-renderer": "^2.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -42,7 +43,9 @@
   },
   "resolutions": {
     "webpack": "5.101.3",
-    "**/webpack": "5.101.3"
+    "**/webpack": "5.101.3",
+    "mermaid": "11.10.1",
+    "**/mermaid": "11.10.1"
   },
   "browserslist": {
     "production": [
