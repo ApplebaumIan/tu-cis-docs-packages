@@ -63,7 +63,7 @@ function createProjectDocsConfig(options = {}) {
   const hasOpenApi = options.openapi !== false && fs.existsSync(openapiSpec);
   const showLastUpdateAuthor = options.showLastUpdateAuthor ?? isGitWorkTree(siteDir);
   const baseThemeConfig = {
-    ...(process.env.NODE_ENV === 'development'
+    ...(process.env.NODE_ENV === 'development' && process.argv.includes('start')
       ? {
           announcementBar: {
             id: 'dev_mode',
