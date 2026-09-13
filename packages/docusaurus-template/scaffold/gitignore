@@ -1,7 +1,0 @@
-node_modules
-documentation/node_modules
-documentation/.docusaurus
-documentation/build
-documentation/.cache
-.DS_Store
-.env.local

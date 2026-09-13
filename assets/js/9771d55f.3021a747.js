@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktu_cis_4398_docs_reference=self.webpackChunktu_cis_4398_docs_reference||[]).push([[6815],{44448:e=>{e.exports=JSON.parse('{"name":"docusaurus-plugin-redoc","id":"project-api"}')}}]);
