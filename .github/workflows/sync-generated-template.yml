@@ -19,6 +19,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Wait for package availability
+        run: |
+          for attempt in {1..40}; do
+            if npm view @tu-cis-courses/create-project-docs@next version >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 15
+          done
+
+          npm view @tu-cis-courses/create-project-docs@next version
       - name: Generate clean template
         run: npx --yes @tu-cis-courses/create-project-docs@next new next-template --skip-install
       - name: Replace generated files
