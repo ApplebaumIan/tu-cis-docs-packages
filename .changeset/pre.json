@@ -6,7 +6,11 @@
     "@tu-cis-courses/docs-content-template": "1.0.0-beta.1",
     "@tu-cis-courses/docusaurus-components": "1.0.0-beta.1",
     "@tu-cis-courses/docusaurus-preset": "1.0.0-beta.1",
-    "@tu-cis-courses/docusaurus-template": "1.0.0-beta.1"
+    "@tu-cis-courses/docusaurus-template": "1.0.0-beta.1",
+    "tu-cis-4398-docs-reference": "1.0.0",
+    "create-project-docs": "2.1.0"
   },
-  "changesets": []
+  "changesets": [
+    "calm-docs-deploy"
+  ]
 }
