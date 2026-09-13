@@ -1,0 +1,31 @@
+{
+  "name": "@tu-cis-courses/docusaurus-components",
+  "version": "1.0.0-beta.1",
+  "description": "Reusable Docusaurus components for Temple University CIS course sites.",
+  "license": "MIT",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./Figure": "./src/Figure/index.js",
+    "./Contributors": "./src/Contributors/index.js",
+    "./InlineDocs": "./src/InlineDocs/index.js",
+    "./ZoomableMedia": "./src/ZoomableMedia/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": ["src", "README.md", "LICENSE"],
+  "publishConfig": {"access": "public", "provenance": true},
+  "engines": {"node": ">=20.0.0"},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApplebaumIan/tu-cis-docs-packages.git",
+    "directory": "packages/docusaurus-components"
+  },
+  "dependencies": {
+    "react-zoom-pan-pinch": "^4.0.3"
+  },
+  "peerDependencies": {
+    "@docusaurus/core": ">=3.9.2 <4.0.0",
+    "react": ">=18.2.0 <20.0.0",
+    "react-dom": ">=18.2.0 <20.0.0"
+  }
+}

@@ -656,4 +656,4 @@ A good change generally:
 
 The goal is not to maximize features.
 
-The goal is to make `tu-cis-4398-docs-template` a reliable, polished, reusable documentation platform for CIS 4398 capstone projects.
+The goal is to make `tu-cis-docs-packages` a reliable, polished, reusable documentation platform for CIS 4398 capstone projects.

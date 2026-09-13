@@ -1,0 +1,36 @@
+{
+  "name": "tu-cis-4398-docs-packages",
+  "private": true,
+  "description": "Reusable documentation packages for Temple University CIS courses.",
+  "workspaces": [
+    "documentation",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspace tu-cis-4398-docs-reference build",
+    "test": "yarn workspace @tu-cis-courses/create-project-docs test",
+    "test:packed": "node scripts/test-packed-project.js",
+    "pack:check": "node scripts/check-packages.js",
+    "version-packages": "changeset version && node scripts/sync-package-versions.js"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "@docusaurus/core": "3.9.2",
+    "@docusaurus/plugin-content-docs": "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+    "@docusaurus/theme-classic": "3.9.2",
+    "@docusaurus/theme-common": "3.9.2",
+    "@docusaurus/theme-live-codeblock": "3.9.2",
+    "@docusaurus/theme-mermaid": "3.9.2",
+    "@docusaurus/utils": "3.9.2",
+    "@mdx-js/react": "3.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "webpack": "5.101.3"
+  },
+  "packageManager": "yarn@1.22.22",
+  "resolutions": {
+    "webpack": "5.101.3",
+    "**/webpack": "5.101.3"
+  }
+}

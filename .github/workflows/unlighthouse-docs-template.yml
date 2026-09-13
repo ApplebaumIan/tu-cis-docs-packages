@@ -3,7 +3,7 @@ name: Unlighthouse Report for Docs
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Deploy Docs"]
+    workflows: ["Deploy Reference Docs"]
     types: [completed]
 
 jobs:
@@ -19,4 +19,4 @@ jobs:
 
       - name: Unlighthouse assertions and client
         run: |
-          unlighthouse-ci --site https://applebaumian.github.io/tu-cis-4398-docs-template/ --budget 75 --build-static
+          unlighthouse-ci --site https://applebaumian.github.io/tu-cis-docs-packages/ --budget 75 --build-static

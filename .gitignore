@@ -1,5 +1,10 @@
-# Generated files
+# Dependencies and generated files
+node_modules
 .docusaurus
+build
+.cache
+coverage
+*.tgz
 
 # Misc
 .DS_Store
