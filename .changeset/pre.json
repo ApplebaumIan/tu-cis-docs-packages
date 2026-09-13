@@ -11,6 +11,7 @@
     "create-project-docs": "2.1.0"
   },
   "changesets": [
-    "calm-docs-deploy"
+    "calm-docs-deploy",
+    "tidy-production-banner"
   ]
 }

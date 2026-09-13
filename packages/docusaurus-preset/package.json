@@ -1,6 +1,6 @@
 {
   "name": "@tu-cis-courses/docusaurus-preset",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-next.2",
   "description": "Docusaurus preset, theme, and documentation integrations for Temple University CIS courses.",
   "license": "MIT",
   "main": "src/preset/index.js",
@@ -14,9 +14,21 @@
     "./styles": "./styles/custom.css",
     "./package.json": "./package.json"
   },
-  "files": ["src", "styles", "tutorial", "tutorialSidebars.js", "README.md", "LICENSE"],
-  "publishConfig": {"access": "public", "provenance": true},
-  "engines": {"node": ">=20.0.0"},
+  "files": [
+    "src",
+    "styles",
+    "tutorial",
+    "tutorialSidebars.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ApplebaumIan/tu-cis-docs-packages.git",
