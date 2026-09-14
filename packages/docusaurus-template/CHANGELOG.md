@@ -1,5 +1,11 @@
 # @tu-cis-courses/docusaurus-template
 
+## 1.0.0-next.4
+
+### Patch Changes
+
+- c37788c: Restore the Docusaurus dinosaur example image and favicon as valid binary assets.
+
 ## 1.0.0-next.3
 
 ### Patch Changes
