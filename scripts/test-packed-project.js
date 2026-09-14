@@ -55,6 +55,16 @@ try {
   ], bootstrap);
 
   const documentation = path.join(bootstrap, 'generated', 'documentation');
+  const generatedAssets = [
+    ['docusaurus.png', Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])],
+    ['favicon.ico', Buffer.from([0x00, 0x00, 0x01, 0x00])],
+  ];
+  for (const [filename, signature] of generatedAssets) {
+    const contents = fs.readFileSync(path.join(documentation, 'static', 'img', filename));
+    if (!contents.subarray(0, signature.length).equals(signature)) {
+      throw new Error(`Generated ${filename} has an invalid binary signature.`);
+    }
+  }
   const packageJsonPath = path.join(documentation, 'package.json');
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
   for (const [name, tarball] of Object.entries(tarballs)) {
