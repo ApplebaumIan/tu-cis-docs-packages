@@ -12,6 +12,7 @@
     "docs:list": "create-project-docs section list",
     "docs:add": "create-project-docs section add",
     "docs:update": "create-project-docs section update",
+    "docs:customize": "create-project-docs customize",
     "docs:check": "create-project-docs check",
     "docs:upgrade": "create-project-docs update all"
   },

@@ -23,6 +23,8 @@ const CONTENT_PACKAGE = '@tu-cis-courses/docs-content-template';
 const COMPONENTS_PACKAGE = '@tu-cis-courses/docusaurus-components';
 const PRESET_PACKAGE = '@tu-cis-courses/docusaurus-preset';
 const CLI_PACKAGE = '@tu-cis-courses/create-project-docs';
+const NAVIGATION_CUSTOMIZATION = 'documentation/project-docs.json';
+const CSS_CUSTOMIZATION = 'documentation/src/css/custom.css';
 const args = process.argv.slice(2);
 
 function usage() {
@@ -32,6 +34,7 @@ function usage() {
   create-project-docs section list
   create-project-docs section add <requirements|architecture|testing|api>
   create-project-docs section update [section]
+  create-project-docs customize <navigation|css|all>
   create-project-docs update <runtime|template|content|all>
   create-project-docs check [--startup]
   create-project-docs migrate
@@ -85,6 +88,7 @@ function applyRecommendedVersions(packageJson, template) {
   packageJson.scripts['docs:list'] = 'create-project-docs section list';
   packageJson.scripts['docs:add'] = 'create-project-docs section add';
   packageJson.scripts['docs:update'] = 'create-project-docs section update';
+  packageJson.scripts['docs:customize'] = 'create-project-docs customize';
   packageJson.scripts['docs:check'] = 'create-project-docs check';
   packageJson.scripts['docs:upgrade'] = 'create-project-docs update all';
   return recommended;
@@ -267,6 +271,38 @@ function updateSections(projectRoot, requested) {
   console.log(`Updated ${changed} files. ${conflicts} conflicts preserved.`);
   if (conflicts) console.log('Review .tu-cis-docs/updates.');
   return {changed, conflicts};
+}
+
+function customizeProject(projectRoot, requested) {
+  if (!['navigation', 'css', 'all'].includes(requested)) {
+    throw new Error('Choose a customization: navigation, css, or all.');
+  }
+
+  const state = readState(projectRoot);
+  const selected = requested === 'all' ? ['navigation', 'css'] : [requested];
+  for (const customization of selected) {
+    const relative = customization === 'navigation' ? NAVIGATION_CUSTOMIZATION : CSS_CUSTOMIZATION;
+    const destination = managedPath(projectRoot, relative);
+
+    if (fs.existsSync(destination)) {
+      console.log(`Preserved existing ${relative}.`);
+    } else if (customization === 'navigation') {
+      writeJsonAtomic(destination, {
+        showTemplateHelp: false,
+        navbarItems: [],
+        footerColumns: [],
+      });
+      console.log(`Created ${relative}.`);
+    } else {
+      fs.mkdirSync(path.dirname(destination), {recursive: true});
+      fs.writeFileSync(destination, '/* Add project-specific style overrides here. */\n', {flag: 'wx'});
+      console.log(`Created ${relative}.`);
+    }
+
+    delete state.files[relative];
+    delete state.conflicts[relative];
+  }
+  writeState(projectRoot, state);
 }
 
 function updateTemplate(projectRoot) {
@@ -495,6 +531,7 @@ async function main() {
   if (command === 'section' && args[1] === 'list') return listSections(projectRoot);
   if (command === 'section' && args[1] === 'add') return addSection(projectRoot, args[2]);
   if (command === 'section' && args[1] === 'update') return updateSections(projectRoot, args[2]);
+  if (command === 'customize') return customizeProject(projectRoot, args[1]);
   if (command === 'doctor') return doctor(projectRoot);
   if (command === 'migrate') return migrate(projectRoot);
   if (command === 'check') return checkUpdates(projectRoot, args.includes('--startup'));

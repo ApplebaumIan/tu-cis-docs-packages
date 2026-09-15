@@ -62,6 +62,13 @@ function createProjectDocsConfig(options = {}) {
     ?? path.join(docsPath, 'api-specification', 'openapi', 'index.openapi.yaml');
   const hasOpenApi = options.openapi !== false && fs.existsSync(openapiSpec);
   const showLastUpdateAuthor = options.showLastUpdateAuthor ?? isGitWorkTree(siteDir);
+  const showTemplateHelp = options.showTemplateHelp !== false;
+  const navbarItems = Array.isArray(options.navbarItems) ? options.navbarItems : [];
+  const footerColumns = Array.isArray(options.footerColumns) ? options.footerColumns : [];
+  const moreItems = [
+    ...(repositoryUrl ? [{label: 'GitHub', href: repositoryUrl}] : []),
+    ...(showTemplateHelp ? [{label: 'Template Contributors', to: '/tutorial/open-source-usage'}] : []),
+  ];
   const baseThemeConfig = {
     ...(process.env.NODE_ENV === 'development' && process.argv.includes('start')
       ? {
@@ -79,7 +86,10 @@ function createProjectDocsConfig(options = {}) {
       logo: {alt: 'Project logo', src: logo},
       items: [
         {type: 'doc', docId: 'intro', position: 'left', label: 'Documentation'},
-        {to: '/tutorial/intro', label: 'Template Help', position: 'left', activeBaseRegex: '/tutorial/'},
+        ...(showTemplateHelp
+          ? [{to: '/tutorial/intro', label: 'Template Help', position: 'left', activeBaseRegex: '/tutorial/'}]
+          : []),
+        ...navbarItems,
         ...(repositoryUrl ? [{href: repositoryUrl, label: 'GitHub', position: 'right'}] : []),
       ],
     },
@@ -87,13 +97,8 @@ function createProjectDocsConfig(options = {}) {
       logo: {alt: 'Project logo', src: logo},
       links: [
         {title: 'Docs', items: [{label: 'Documentation', to: '/docs/intro'}]},
-        {
-          title: 'More',
-          items: [
-            ...(repositoryUrl ? [{label: 'GitHub', href: repositoryUrl}] : []),
-            {label: 'Template Contributors', to: '/tutorial/open-source-usage'},
-          ],
-        },
+        ...(moreItems.length ? [{title: 'More', items: moreItems}] : []),
+        ...footerColumns,
       ],
       copyright: `Copyright © ${new Date().getFullYear()} ${title}. Built with Docusaurus.`,
     },
@@ -111,7 +116,6 @@ function createProjectDocsConfig(options = {}) {
           ...options.docs,
         },
         theme: {
-          customCss: fs.existsSync(localCss) ? localCss : undefined,
           ...options.classicTheme,
         },
         ...options.classic,
@@ -133,6 +137,10 @@ function createProjectDocsConfig(options = {}) {
         projectName,
         repoRoot: options.repoRoot,
         ...options.preset,
+        theme: {
+          customCss: fs.existsSync(localCss) ? localCss : undefined,
+          ...options.preset?.theme,
+        },
         revisionHistory: process.env.DISABLE_REVISION_HISTORY === '1' || options.preset?.revisionHistory === false
           ? false
           : {

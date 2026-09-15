@@ -21,9 +21,11 @@ module.exports = function projectDocsTheme(context, options = {}) {
     },
 
     getClientModules() {
-      return options.loadStyles === false
-        ? []
-        : [path.resolve(__dirname, '..', '..', 'styles', 'custom.css')];
+      if (options.loadStyles === false) return [];
+      return [
+        path.resolve(__dirname, '..', '..', 'styles', 'custom.css'),
+        ...(options.customCss ? [path.resolve(options.customCss)] : []),
+      ];
     },
 
     configureWebpack() {
