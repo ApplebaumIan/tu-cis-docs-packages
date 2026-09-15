@@ -1,3 +1,4 @@
+const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -48,7 +49,8 @@ try {
     resolutions: Object.fromEntries(bootstrapPackages.map((name) => [name, tarballs[name]])),
   });
   run(yarn, ['install'], bootstrap);
-  run(path.join(bootstrap, 'node_modules', '.bin', 'create-project-docs'), [
+  const cli = path.join(bootstrap, 'node_modules', '.bin', 'create-project-docs');
+  run(cli, [
     'new',
     path.join(bootstrap, 'generated'),
     '--skip-install',
@@ -65,6 +67,41 @@ try {
       throw new Error(`Generated ${filename} has an invalid binary signature.`);
     }
   }
+
+  run(cli, ['customize', 'all'], documentation);
+  const customizationPath = path.join(documentation, 'project-docs.json');
+  const customization = JSON.parse(fs.readFileSync(customizationPath, 'utf8'));
+  assert.equal(customization.showTemplateHelp, false);
+  customization.navbarItems.push({href: 'https://example.com/status', label: 'Project Status', position: 'left'});
+  customization.footerColumns.push({
+    title: 'Project',
+    items: [{label: 'Status', href: 'https://example.com/status'}],
+  });
+  writeJson(customizationPath, customization);
+  const customCssPath = path.join(documentation, 'src', 'css', 'custom.css');
+  fs.writeFileSync(customCssPath, ':root { --student-customization-test: 1; }\n');
+  const statePath = path.join(bootstrap, 'generated', '.tu-cis-docs', 'manifest.json');
+  const managedState = JSON.parse(fs.readFileSync(statePath, 'utf8'));
+  managedState.files['documentation/src/css/custom.css'] = {
+    owner: 'template',
+    sourceVersion: '1.0.0',
+    sourceHash: 'legacy-placeholder',
+  };
+  managedState.conflicts['documentation/src/css/custom.css'] = {
+    owner: 'template',
+    targetVersion: '1.1.0',
+  };
+  writeJson(statePath, managedState);
+  run(cli, ['customize', 'all'], documentation);
+  assert.equal(fs.readFileSync(customCssPath, 'utf8'), ':root { --student-customization-test: 1; }\n');
+  const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
+  assert.equal(state.files['documentation/project-docs.json'], undefined);
+  assert.equal(state.files['documentation/src/css/custom.css'], undefined);
+  assert.equal(state.conflicts['documentation/src/css/custom.css'], undefined);
+  run(cli, ['update', 'template'], documentation);
+  assert.equal(fs.readFileSync(customCssPath, 'utf8'), ':root { --student-customization-test: 1; }\n');
+  assert.deepEqual(JSON.parse(fs.readFileSync(customizationPath, 'utf8')), customization);
+
   const packageJsonPath = path.join(documentation, 'package.json');
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
   for (const [name, tarball] of Object.entries(tarballs)) {
@@ -81,6 +118,25 @@ try {
   fs.writeFileSync(path.join(generatedStatic, 'index.html'), '<!doctype html><title>Generated documentation</title>\n');
 
   run(yarn, ['install'], documentation);
+  const docusaurusConfig = require(path.join(documentation, 'docusaurus.config.js'));
+  assert.equal(docusaurusConfig.themeConfig.navbar.items.some((item) => item.label === 'Template Help'), false);
+  assert.equal(docusaurusConfig.themeConfig.navbar.items.some((item) => item.label === 'Project Status'), true);
+  assert.equal(docusaurusConfig.themeConfig.footer.links.some((column) => (
+    column.items.some((item) => item.label === 'Template Contributors')
+  )), false);
+  assert.equal(docusaurusConfig.themeConfig.footer.links.some((column) => column.title === 'Project'), true);
+  assert.equal(
+    fs.realpathSync(docusaurusConfig.presets[1][1].theme.customCss),
+    fs.realpathSync(customCssPath),
+  );
+  const themeFactory = require(require.resolve('@tu-cis-courses/docusaurus-preset/theme', {
+    paths: [documentation],
+  }));
+  const clientModules = themeFactory(
+    {siteDir: documentation},
+    docusaurusConfig.presets[1][1].theme,
+  ).getClientModules();
+  assert.equal(fs.realpathSync(clientModules.at(-1)), fs.realpathSync(customCssPath));
   run('npm', ['run', 'docs:add', 'requirements'], documentation);
   run(yarn, ['build'], documentation, {
     env: {
