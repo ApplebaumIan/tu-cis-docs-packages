@@ -7,10 +7,10 @@
   "recommended": {
     "docusaurus": "3.9.2",
     "mermaid": "11.10.1",
-    "docusaurusComponents": "1.0.0-beta.1",
-    "docusaurusPreset": "1.0.0-next.3",
+    "docusaurusComponents": "1.0.0-next.2",
+    "docusaurusPreset": "1.0.0-next.4",
     "docsContentTemplate": "1.0.0-beta.1",
-    "createProjectDocs": "1.0.0-next.5"
+    "createProjectDocs": "1.0.0-next.6"
   },
   "generatedRepository": "tu-cis-4398-docs-template"
 }

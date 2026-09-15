@@ -1,5 +1,12 @@
 # @tu-cis-courses/create-project-docs
 
+## 1.0.0-next.6
+
+### Patch Changes
+
+- Updated dependencies [07c47b3]
+  - @tu-cis-courses/docusaurus-template@1.0.0-next.6
+
 ## 1.0.0-next.5
 
 ### Patch Changes

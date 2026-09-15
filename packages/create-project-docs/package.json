@@ -1,6 +1,6 @@
 {
   "name": "@tu-cis-courses/create-project-docs",
-  "version": "1.0.0-next.5",
+  "version": "1.0.0-next.6",
   "description": "Create and update Temple University CIS Docusaurus documentation sites.",
   "license": "MIT",
   "bin": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@tu-cis-courses/docs-content-template": "1.0.0-beta.1",
-    "@tu-cis-courses/docusaurus-template": "1.0.0-next.5",
+    "@tu-cis-courses/docusaurus-template": "1.0.0-next.6",
     "semver": "^7.7.2"
   }
 }
