@@ -1,5 +1,11 @@
 # @tu-cis-courses/docusaurus-template
 
+## 1.0.0-next.5
+
+### Patch Changes
+
+- c9e0829: Add student-owned navigation, footer, and CSS customization files that remain untouched by template upgrades.
+
 ## 1.0.0-next.4
 
 ### Patch Changes
