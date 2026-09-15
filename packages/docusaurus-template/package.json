@@ -1,6 +1,6 @@
 {
   "name": "@tu-cis-courses/docusaurus-template",
-  "version": "1.0.0-next.4",
+  "version": "1.0.0-next.5",
   "description": "Managed Docusaurus site scaffold for Temple University CIS projects.",
   "license": "MIT",
   "main": "manifest.json",
