@@ -1,5 +1,11 @@
 # @tu-cis-courses/docusaurus-template
 
+## 1.0.0-next.6
+
+### Patch Changes
+
+- 07c47b3: Make images passed to Figure with the src property open in the fullscreen pan and zoom viewer.
+
 ## 1.0.0-next.5
 
 ### Patch Changes

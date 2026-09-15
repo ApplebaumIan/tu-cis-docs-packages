@@ -1,6 +1,6 @@
 {
   "name": "@tu-cis-courses/docusaurus-preset",
-  "version": "1.0.0-next.3",
+  "version": "1.0.0-next.4",
   "description": "Docusaurus preset, theme, and documentation integrations for Temple University CIS courses.",
   "license": "MIT",
   "main": "src/preset/index.js",
@@ -35,7 +35,7 @@
     "directory": "packages/docusaurus-preset"
   },
   "dependencies": {
-    "@tu-cis-courses/docusaurus-components": "^1.0.0-beta.1",
+    "@tu-cis-courses/docusaurus-components": "^1.0.0-next.2",
     "core-js": "^3.1.4",
     "mobx": "^6.9.0",
     "redocusaurus": "^2.5.2",

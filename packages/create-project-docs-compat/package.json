@@ -1,6 +1,6 @@
 {
   "name": "create-project-docs",
-  "version": "2.1.1-next.3",
+  "version": "2.1.1-next.4",
   "private": true,
   "description": "Compatibility wrapper for @tu-cis-courses/create-project-docs.",
   "license": "MIT",
@@ -21,6 +21,6 @@
     "directory": "packages/create-project-docs-compat"
   },
   "dependencies": {
-    "@tu-cis-courses/create-project-docs": "1.0.0-next.5"
+    "@tu-cis-courses/create-project-docs": "1.0.0-next.6"
   }
 }
